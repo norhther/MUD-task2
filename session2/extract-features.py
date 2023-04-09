@@ -90,6 +90,7 @@ def readHSDBToSet(path = '../DDI/resources/hsdb.txt'):
       for line in f:
          hsdb.add(line.strip().lower())
    return hsdb
+
 ## --------- Feature extractor ----------- 
 ## -- Extract features for each token in given sentence
 
@@ -107,29 +108,29 @@ def extract_features(tokens) :
    # for each token, generate list of features and add it to the result
    result = []
    for k in range(0,len(tokens)):
-      tokenFeatures = [];
+      tokenFeatures = []
       t = tokens[k][0]
       tokenFeatures.append("form="+t)
       tokenFeatures.append("suf3="+t[-3:])
       
       if is_abbreviation(t):
-         tokenFeatures.append("abbr")
+         tokenFeatures.append("abbr=T")
 
       if has_common_drug_name(t):
-         tokenFeatures.append("commonDrugName")
+         tokenFeatures.append("commonDrugName=T")
 
       if has_numbers_with_commas(t):
-         tokenFeatures.append("hasNumbersWithCommas")
+         tokenFeatures.append("hasNumbersWithCommas=T")
       if hasUppercase(t):
-         tokenFeatures.append("hasUppercase")
+         tokenFeatures.append("hasUppercase=T")
       if hasNumber(t):
-         tokenFeatures.append("hasNumber")
+         tokenFeatures.append("hasNumber=T")
 
       if t.lower() in drug:
          tokenFeatures.append("drugBankType="+str(drug[t.lower()]).strip())
       
       if t.lower() in hsdb:
-         tokenFeatures.append("hsdb")
+         tokenFeatures.append("hsdb=T")
 
       if drug_n_list(t):
          tokenFeatures.append("drug_n="+str(drug_n_list(t)))
@@ -144,9 +145,9 @@ def extract_features(tokens) :
          tokenFeatures.append("formPrev="+tPrev)
          tokenFeatures.append("suf3Prev="+tPrev[-3:])
          if is_abbreviation(tPrev):
-            tokenFeatures.append("abbrPrev")
+            tokenFeatures.append("abbrPrev=T")
          else:
-            tokenFeatures.append("notAbbrPrev")
+            tokenFeatures.append("abbrPrev=F")
 
       else :
          tokenFeatures.append("BoS")
@@ -156,9 +157,9 @@ def extract_features(tokens) :
          tokenFeatures.append("formNext="+tNext)
          tokenFeatures.append("suf3Next="+tNext[-3:])
          if is_abbreviation(tNext):
-            tokenFeatures.append("abbrNext")
+            tokenFeatures.append("abbrNext=T")
          else:
-            tokenFeatures.append("notAbbrNext")
+            tokenFeatures.append("abbrNext=F")
 
       else:
          tokenFeatures.append("EoS")

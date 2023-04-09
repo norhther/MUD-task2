@@ -23,14 +23,28 @@ cat train.feat | cut -f5- | grep -v ^$ > train.clf.feat
 
 
 # train Naive Bayes model
-#echo "Training Naive Bayes model..."
-#python3 train-sklearn.py model.joblib vectorizer.joblib < train.clf.feat
+echo "Training Naive Bayes model..."
+python3 train-sklearn.py model.joblib vectorizer.joblib < train.clf.feat
 # run Naive Bayes model
-#echo "Running Naive Bayes model..."
-#python3 predict-sklearn.py model.joblib vectorizer.joblib < devel.feat > devel-NB.out
-# evaluate Naive Bayes results 
-#echo "Evaluating Naive Bayes results..."
-#python3 evaluator.py NER $BASEDIR/data/devel devel-NB.out > devel-NB.stats
 
+echo "Running Naive Bayes model..."
+python3 predict-sklearn.py model.joblib vectorizer.joblib < devel.feat > devel-NB.out
+# evaluate Naive Bayes results 
+echo "Evaluating Naive Bayes results..."
+python3 evaluator.py NER $BASEDIR/data/devel devel-NB.out > devel-NB.stats
+
+
+# train SGD model
+echo "Training SGD model..."
+python3 train-sgd.py model.joblib vectorizer.joblib < train.clf.feat
+# run SGD
+echo "Running SGD model..."
+python3 predict-sklearn.py model.joblib vectorizer.joblib < devel.feat > devel-SGD.out
+# evaluate Random Forest results
+echo "Evaluating SGD results..."
+python3 evaluator.py NER $BASEDIR/data/devel devel-SGD.out > devel-SGD.stats
 # remove auxiliary files.
-#rm train.clf.feat
+
+rm train.clf.feat
+
+
