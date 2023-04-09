@@ -49,7 +49,7 @@ def prepare_instances(xseq):
 
 if __name__ == '__main__':
 
-    # load leaned model and DictVectorizer
+    # load learned model and DictVectorizer
 	model = load(sys.argv[1])
 	v  = load(sys.argv[2]) 
 
