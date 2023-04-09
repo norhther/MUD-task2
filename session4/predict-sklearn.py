@@ -22,13 +22,10 @@ if __name__ == '__main__':
 	for line in sys.stdin:
 
 		fields = line.strip('\n').split("\t")
-		try:
-			(sid,e1,e2) = fields[0:3]
-			vectors = v.transform(prepare_instances([fields[4:]]))
-			prediction = model.predict(vectors)
+		(sid,e1,e2) = fields[0:3]        
+		vectors = v.transform(prepare_instances([fields[4:]]))
+		prediction = model.predict(vectors)
 
-			if prediction != "null" :            
-				print(sid,e1,e2,prediction[0],sep="|")
-		except:
-			pass
+		if prediction != "null" :            
+			print(sid,e1,e2,prediction[0],sep="|")
 
