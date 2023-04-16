@@ -22,3 +22,12 @@ python3 predict-sklearn.py model.joblib vectorizer.joblib < devel.cod > devel.ou
 echo "Evaluating results..."
 python3 evaluator.py DDI $BASEDIR/data/devel/ devel.out > devel.stats
 
+
+# echo "Training model SGD"
+# python3 train-sgd.py sgd.joblib vectorizer.joblib < train.cod.cl
+# run model
+# echo "Running model..."
+# python3 predict-sklearn.py sgd.joblib vectorizer.joblib < devel.cod > devel.out
+# evaluate results
+# echo "Evaluating results..."
+# python3 evaluator.py DDI $BASEDIR/data/devel/ devel.out > devel-sgd.stats
