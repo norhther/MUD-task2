@@ -23,11 +23,30 @@ BASEDIR=../DDI
 # python3 evaluator.py DDI $BASEDIR/data/devel/ devel.out > devel.stats
 
 
-echo "Training model SGD"
-python3 train-sgd.py sgd.joblib vectorizer.joblib < train.cod.cl
+# echo "Training model SGD"
+# python3 train-sgd.py sgd.joblib vectorizer.joblib < train.cod.cl
+# run model
+# echo "Running model..."
+# python3 predict-sklearn.py sgd.joblib vectorizer.joblib < devel.cod > devel.out
+# evaluate results
+# echo "Evaluating results..."
+# python3 evaluator.py DDI $BASEDIR/data/devel/ devel.out > devel-sgd.stats
+
+# echo "Training model SVC"
+# python3 train-svc.py svc.joblib vectorizer.joblib < train.cod.cl
+# run model
+# echo "Running model..."
+# python3 predict-sklearn.py svc.joblib vectorizer.joblib < devel.cod > devel.out
+# evaluate results
+# echo "Evaluating results..."
+# python3 evaluator.py DDI $BASEDIR/data/devel/ devel.out > devel-svc.stats
+
+echo "Training model RF"
+python3 train-rf.py rf.joblib vectorizer.joblib < train.cod.cl
 # run model
 echo "Running model..."
-python3 predict-sklearn.py sgd.joblib vectorizer.joblib < devel.cod > devel.out
+python3 predict-sklearn.py rf.joblib vectorizer.joblib < devel.cod > devel.out
 # evaluate results
 echo "Evaluating results..."
-python3 evaluator.py DDI $BASEDIR/data/devel/ devel.out > devel-sgd.stats
+python3 evaluator.py DDI $BASEDIR/data/devel/ devel.out > devel-rf.stats
+
